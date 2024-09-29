@@ -1,0 +1,99 @@
+@use "sass:math";
+
+@mixin recolor($color: #000, $opacity: 1) {
+  $r: math.div(red($color), 255);
+  $g: math.div(green($color), 255);
+  $b: math.div(blue($color), 255);
+  $a: $opacity;
+
+  // grayscale fallback if SVG from data url is not supported
+  $lightness: lightness($color);
+  filter: saturate(0%) brightness(0%) invert($lightness) opacity($opacity);
+
+  // color filter
+  $svg-filter-id: "recolor";
+  filter: url('data:image/svg+xml;utf8,\
+  <svg xmlns="http://www.w3.org/2000/svg">\
+    <filter id="#{$svg-filter-id}" color-interpolation-filters="sRGB">\
+      <feColorMatrix type="matrix" values="\
+        0 0 0 0 #{$r}\
+        0 0 0 0 #{$g}\
+        0 0 0 0 #{$b}\
+        0 0 0 #{$a} 0\
+      "/>\
+    </filter>\
+  </svg>\
+  ##{$svg-filter-id}');
+}
+
+#leaflet-map {
+  width: 100%;
+  margin: 0;
+  z-index: 0;
+  background-color: rgba(80, 120, 180, 0.1);
+
+  .leaflet-image-layer {
+    margin: 0 !important;
+  }
+}
+
+// to align icon
+.custom-div-icon .icon {
+  position: absolute;
+  width: 32px;
+  height: 17px;
+  font-size: 16px;
+  top: 8;
+  left: 0;
+  z-index: inherit;
+  margin: 0px auto;
+}
+
+// to align marker
+.custom-div-icon .marker {
+  position: absolute;
+  width: 32px;
+  height: 48px;
+  margin: 0px auto;
+  z-index: inherit;
+
+  &.green {
+    fill: #039c4b;
+  }
+
+  &.lime {
+    fill: #66d313;
+  }
+
+  &.yellow {
+    fill: #fedf17;
+  }
+
+  &.pink {
+    fill: #ff0984;
+  }
+
+  &.blue {
+    fill: #21409a;
+  }
+
+  &.lightblue {
+    fill: #04adff;
+  }
+
+  &.brown {
+    fill: #e48873;
+  }
+
+  &.orange {
+    fill: #f16623;
+  }
+
+  &.red {
+    fill: #f44546;
+  }
+
+  &.purple {
+    fill: #7623a5;
+  }
+}

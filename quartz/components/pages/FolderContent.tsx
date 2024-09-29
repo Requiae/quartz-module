@@ -7,6 +7,7 @@ import { stripSlashes, simplifySlug } from "../../util/path";
 import { Root } from "hast";
 import { htmlToJsx } from "../../util/jsx";
 import { i18n } from "../../i18n";
+import { MapConstructor } from "..";
 
 interface FolderContentOptions {
   /**
@@ -47,6 +48,8 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         ? fileData.description
         : htmlToJsx(fileData.filePath!, tree);
 
+    const Map: QuartzComponent = MapConstructor();
+
     return (
       <div class={classes}>
         <article>{content}</article>
@@ -59,6 +62,7 @@ export default ((opts?: Partial<FolderContentOptions>) => {
             </p>
           )}
           <div>
+            <Map {...props} />
             <PageList {...listProps} />
           </div>
         </div>

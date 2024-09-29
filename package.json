@@ -17,7 +17,9 @@
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
     "test": "tsx ./quartz/util/path.test.ts && tsx ./quartz/depgraph.test.ts",
-    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
+    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1",
+    "sync": "npx quartz sync",
+    "serve": "npx quartz build --serve"
   },
   "engines": {
     "npm": ">=9.3.1",
@@ -54,6 +56,7 @@
     "hast-util-to-string": "^3.0.0",
     "is-absolute-url": "^4.0.1",
     "js-yaml": "^4.1.0",
+    "leaflet": "^1.9.4",
     "lightningcss": "^1.26.0",
     "mdast-util-find-and-replace": "^3.0.1",
     "mdast-util-to-hast": "^13.2.0",
@@ -64,6 +67,7 @@
     "preact-render-to-string": "^6.5.11",
     "pretty-bytes": "^6.1.1",
     "pretty-time": "^1.1.0",
+    "react-leaflet": "^4.2.1",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-citation": "^2.1.1",
@@ -99,6 +103,7 @@
     "@types/d3": "^7.4.3",
     "@types/hast": "^3.0.4",
     "@types/js-yaml": "^4.0.9",
+    "@types/leaflet": "^1.9.12",
     "@types/node": "^22.5.5",
     "@types/pretty-time": "^1.1.5",
     "@types/source-map-support": "^0.5.10",
