@@ -8,13 +8,13 @@ import * as Plugin from "./quartz/plugins";
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: process.env.pageTitle ?? "🪴 Quartz 4.0",
+    pageTitle: process.env.npm_package_config_title ?? "🪴 Quartz 4.0",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
     locale: "en-GB",
-    baseUrl: process.env.baseUrl ?? "requiae.github.io/",
+    baseUrl: process.env.npm_package_config_baseurl ?? "requiae.github.io/",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
     theme: {

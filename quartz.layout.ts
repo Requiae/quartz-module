@@ -9,7 +9,7 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/Requiae",
+      GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae",
     },
   }),
 };
