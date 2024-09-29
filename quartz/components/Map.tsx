@@ -119,7 +119,7 @@ export default ((ignore: boolean = false) => {
     };
   }
 
-  const MarkerComponent = (marker: Marker, index: number, prefix: string) => {
+  const MarkerComponent = (marker: Marker, index: number) => {
     return (
       <div
         class={"marker"}
@@ -140,8 +140,6 @@ export default ((ignore: boolean = false) => {
       return <></>;
     }
 
-    const urlPrefix = props.cfg.baseUrl ?? "";
-
     const markers = props.allFiles
       .map((file) => buildMarker(file))
       .filter((marker) => marker !== undefined)
@@ -155,7 +153,7 @@ export default ((ignore: boolean = false) => {
           data-min-zoom={mapData.minZoom}
           data-max-zoom={mapData.maxZoom}
         />
-        {markers.map((object, i) => MarkerComponent(object, i, urlPrefix))}
+        {markers.map((object, i) => MarkerComponent(object, i))}
       </div>
     );
   };
