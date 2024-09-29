@@ -1,3 +1,9 @@
 @use "./base.scss";
-
+@use "./variables.scss" as *;
 // put your custom CSS here!
+@use "./custom/image-adjustments.scss";
+@use "./custom/callout-adjustments.scss";
+@use "./custom/column-callout.scss";
+@use "./custom/caption-callout.scss";
+@use "./custom/infobox-callout.scss";
+@use "./custom/transclusion-adjustments.scss";
