@@ -20,13 +20,21 @@ enum MarkerColour {
 }
 
 enum MarkerIcon {
-  capitol = "capitol",
-  town = "town",
-  subway = "subway",
+  anchor = "anchor",
+  anvil = "anvil",
+  bed = "bed",
+  branch = "branch",
   camp = "camp",
-  star = "star",
-  tree = "tree",
+  capitol = "capitol",
+  cauldron = "cauldron",
+  diner = "diner",
+  farm = "farm",
   shield = "shield",
+  star = "star",
+  subway = "subway",
+  town = "town",
+  tree = "tree",
+  university = "university",
 }
 
 interface Marker {

@@ -27,19 +27,19 @@ npm run serve
 
 ## Custom frontmatter
 
-| Item          | Type    | Explanation                                                                                |
-| ------------- | ------- | ------------------------------------------------------------------------------------------ |
-| prioritise    | boolean | Whether this page should appear above maps in the explorer                                 |
-| map           | object  | Custom object containing marker information Whether this page should show the campaign map |
-| map.name      | string  | Name of the map                                                                            |
-| map.path      | string  | Path to the map image where the content folder is the root                                 |
-| map.minZoom   | number  | The minimum zoom the map allows                                                            |
-| map.maxZoom   | number  | The maximum zoom the map allows                                                            |
-| marker        | object  | Custom object containing marker information                                                |
-| marker.x      | number  | Marker x coordinate                                                                        |
-| marker.y      | number  | Marker y coordinate                                                                        |
-| marker.icon   | string  | `capitol`, `town`, `camp`, `subway`, `star`, `tree`, `shield`                              |
-| marker.colour | string  | `green`, `lime`, `yellow`, `pink`, `blue`, `lightblue`, `brown`, `orange`, `red`, `purple` |
+| Item          | Type    | Explanation                                                                                                                                  |
+| ------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| prioritise    | boolean | Whether this page should appear above maps in the explorer                                                                                   |
+| map           | object  | Custom object containing marker information Whether this page should show the campaign map                                                   |
+| map.name      | string  | Name of the map                                                                                                                              |
+| map.path      | string  | Path to the map image where the content folder is the root                                                                                   |
+| map.minZoom   | number  | The minimum zoom the map allows                                                                                                              |
+| map.maxZoom   | number  | The maximum zoom the map allows                                                                                                              |
+| marker        | object  | Custom object containing marker information                                                                                                  |
+| marker.x      | number  | Marker x coordinate                                                                                                                          |
+| marker.y      | number  | Marker y coordinate                                                                                                                          |
+| marker.icon   | string  | `anchor`, `anvil`, `bed`, `branch`, `camp`, `capitol`, `cauldron`, `diner`, `farm`, `shield`, `star`, `subway`, `town`, `tree`, `university` |
+| marker.colour | string  | `green`, `lime`, `yellow`, `pink`, `blue`, `lightblue`, `brown`, `orange`, `red`, `purple`                                                   |
 
 > A marker requires `title`, `marker.x`, `marker.x`, and `marker.icon` to be set. Colour defaults to `blue`.
 
