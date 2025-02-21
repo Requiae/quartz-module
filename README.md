@@ -7,6 +7,8 @@ Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility 
 
 🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
 
+Original code found on https://github.com/jackyzha0/quartz
+
 [Join the Discord Community](https://discord.gg/cRFFHYye7t)
 
 ## Sponsors
@@ -16,6 +18,19 @@ Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility 
     <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
   </a>
 </p>
+
+### Updating Quartz from Source
+
+- Create a clean update branch from `main`
+- Overwrite the `quartz` directory and `package.json` with the source code from [GitHub](https://github.com/jackyzha0/quartz)
+- Ensure no `leaflet` libraries are removed from `package.json`
+- Run `npm install`
+- Run `npm run format` to get rid of all the `;` changes
+- Go through the changes and ensure none of the changes undo custom code, otherwise you'll need to do some manual work. Below is a non-exhaustive list of file to check:
+  - `quartz/components/pages/Content.tsx`
+  - `quartz/components/Head.tsx`
+  - `quartz/styles/custom.scss`
+- Commit and make a PR
 
 ## Get started
 
