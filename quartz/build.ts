@@ -43,12 +43,7 @@ function newBuildId() {
 }
 
 async function buildQuartz(argv: Argv, mut: Mutex, clientRefresh: () => void) {
-  const ctx: BuildCtx = {
-    buildId: newBuildId(),
-    argv,
-    cfg,
-    allSlugs: [],
-  };
+  const ctx: BuildCtx = { buildId: newBuildId(), argv, cfg, allSlugs: [] };
 
   const perf = new PerfTimer();
   const output = argv.output;
@@ -139,9 +134,9 @@ async function startServing(
 
   const buildFromEntry = argv.fastRebuild ? partialRebuildFromEntrypoint : rebuildFromEntrypoint;
   watcher
-    .on("add", (fp) => buildFromEntry(fp, "add", clientRefresh, buildData))
-    .on("change", (fp) => buildFromEntry(fp, "change", clientRefresh, buildData))
-    .on("unlink", (fp) => buildFromEntry(fp, "delete", clientRefresh, buildData));
+    .on("add", (fp) => buildFromEntry(fp as string, "add", clientRefresh, buildData))
+    .on("change", (fp) => buildFromEntry(fp as string, "change", clientRefresh, buildData))
+    .on("unlink", (fp) => buildFromEntry(fp as string, "delete", clientRefresh, buildData));
 
   return async () => {
     await watcher.close();
