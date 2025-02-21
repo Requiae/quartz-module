@@ -9,7 +9,9 @@ import sharp from "sharp";
 import { ImageOptions, SocialImageOptions, getSatoriFont, defaultImage } from "../util/og";
 import { unescapeHTML } from "../util/escape";
 
-// HAS CUSTOMISED CODE
+/*****************************************
+ * HAS CUSTOMISED CODE
+ ****************************************/
 
 /**
  * Generates social image (OG/twitter standard) and saves it as `.webp` inside the public folder
