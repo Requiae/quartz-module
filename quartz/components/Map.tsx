@@ -41,12 +41,10 @@ interface Marker {
   name: string;
   mapName: string;
   link: string;
-  position: {
-    x: number;
-    y: number;
-  };
+  position: { x: number; y: number };
   icon: MarkerIcon;
   colour: MarkerColour;
+  minZoom: number;
 }
 
 interface FrontmatterMarkerData {
@@ -55,6 +53,7 @@ interface FrontmatterMarkerData {
   y: string;
   icon: MarkerIcon;
   colour: MarkerColour | undefined;
+  minZoom: string;
 }
 
 interface FrontmatterMapData {
@@ -106,7 +105,7 @@ function isFrontmatterMapData(object: any): object is FrontmatterMapData {
 }
 
 export default ((ignore: boolean = false) => {
-  function buildMarker(file: QuartzPluginData): Marker | undefined {
+  function buildMarker(file: QuartzPluginData, mapData: FrontmatterMapData): Marker | undefined {
     const { slug, frontmatter } = file;
     const markerData = frontmatter?.marker;
 
@@ -118,12 +117,10 @@ export default ((ignore: boolean = false) => {
       name: frontmatter.title,
       mapName: markerData.mapName,
       link: slug,
-      position: {
-        x: parseInt(markerData.x),
-        y: parseInt(markerData.y),
-      },
+      position: { x: parseInt(markerData.x), y: parseInt(markerData.y) },
       icon: markerData.icon,
       colour: markerData.colour ?? MarkerColour.blue,
+      minZoom: markerData.minZoom ? parseInt(markerData.minZoom) : mapData.minZoom,
     };
   }
 
@@ -138,6 +135,7 @@ export default ((ignore: boolean = false) => {
         data-pos-y={marker.position.y}
         data-icon={marker.icon}
         data-colour={marker.colour}
+        data-min-zoom={marker.minZoom}
       />
     );
   };
@@ -149,7 +147,7 @@ export default ((ignore: boolean = false) => {
     }
 
     const markers = props.allFiles
-      .map((file) => buildMarker(file))
+      .map((file) => buildMarker(file, mapData))
       .filter((marker) => marker !== undefined)
       .filter((marker) => marker.mapName?.toLowerCase() === mapData.name?.toLowerCase());
     return (

@@ -8,6 +8,7 @@ import {
   LeafletMouseEventHandlerFn,
   Map,
   map,
+  Marker,
   marker,
   MarkerOptions,
 } from "leaflet";
@@ -22,6 +23,7 @@ interface MarkerDataSet {
   posY: string;
   icon: string;
   colour: string;
+  minZoom: string;
 }
 
 interface MapDataSet {
@@ -54,15 +56,19 @@ function getMarkerOnClick(url: string): LeafletMouseEventHandlerFn {
 }
 
 function addMarker(markerData: MarkerDataSet, mapItem: Map): void {
-  const options: MarkerOptions = {
-    icon: buildIcon(markerData.icon, markerData.colour),
-  };
+  function addMarkerWhenZoom(markerItem: Marker, mapItem: Map, markerZoom: number) {
+    mapItem.getZoom() >= markerZoom ? markerItem.addTo(mapItem) : markerItem.remove();
+  }
 
-  // eslint-disable-next-line
-  marker([parseInt(markerData.posY), parseInt(markerData.posX)], options)
+  const options: MarkerOptions = { icon: buildIcon(markerData.icon, markerData.colour) };
+
+  const markerZoom = parseInt(markerData.minZoom);
+  const markerItem = marker([parseInt(markerData.posY), parseInt(markerData.posX)], options)
     .bindTooltip(markerData.name)
-    .on("click", getMarkerOnClick(markerData.link))
-    .addTo(mapItem);
+    .on("click", getMarkerOnClick(markerData.link));
+
+  addMarkerWhenZoom(markerItem, mapItem, markerZoom);
+  mapItem.on("zoomend", () => addMarkerWhenZoom(markerItem, mapItem, markerZoom));
 }
 
 function isMarkerDataSet(dataset: any): dataset is MarkerDataSet {
@@ -72,7 +78,8 @@ function isMarkerDataSet(dataset: any): dataset is MarkerDataSet {
     !dataset["posX"] ||
     !dataset["posY"] ||
     !dataset["icon"] ||
-    !dataset["colour"]
+    !dataset["colour"] ||
+    !dataset["minZoom"]
   ) {
     return false;
   }
@@ -119,7 +126,6 @@ async function initialiseMap(
 
   mapElement.style.aspectRatio = (image.naturalWidth / image.naturalHeight).toString();
 
-  //const bounds: LatLngBoundsExpression = [[0, 0], [1064, 1200]];
   const bounds: LatLngBoundsExpression = [
     [0, 0],
     [image.naturalHeight / 2, image.naturalWidth / 2],
@@ -140,6 +146,15 @@ async function initialiseMap(
   return mapItem;
 }
 
+function cleanupMap(mapItem: Map | undefined) {
+  if (!mapItem) {
+    return;
+  }
+
+  mapItem.clearAllEventListeners();
+  mapItem.remove();
+}
+
 document.addEventListener("nav", async () => {
   const map = document.getElementById(MAP_ID);
   if (!map) {
@@ -150,5 +165,5 @@ document.addEventListener("nav", async () => {
   const markerData = getMarkerData(markers);
 
   const mapItem = await initialiseMap(map, markerData);
-  window.addCleanup(() => mapItem?.remove());
+  window.addCleanup(() => cleanupMap(mapItem));
 });

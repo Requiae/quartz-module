@@ -8,9 +8,7 @@ export const sharedPageComponents: SharedLayout = {
   header: [],
   afterBody: [],
   footer: Component.Footer({
-    links: {
-      GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae",
-    },
+    links: { GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae" },
   }),
 };
 
@@ -28,12 +26,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(
-      Component.Explorer({
-        useSavedState: true,
-        sortFn: sortFn,
-      }),
-    ),
+    Component.Explorer({ useSavedState: true, sortFn: sortFn }),
   ],
   right: [
     Component.Graph(),
@@ -54,12 +47,7 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(
-      Component.Explorer({
-        useSavedState: false,
-        sortFn: sortFn,
-      }),
-    ),
+    Component.Explorer({ useSavedState: false, sortFn: sortFn }),
   ],
   right: [],
 };

@@ -2,6 +2,10 @@ import { htmlToJsx } from "../../util/jsx";
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types";
 import { MapConstructor } from "../";
 
+/*****************************************
+ * HAS CUSTOMISED CODE
+ ****************************************/
+
 const Content: QuartzComponent = (props: QuartzComponentProps) => {
   const { tree, fileData } = props;
   const content = htmlToJsx(fileData.filePath!, tree);
