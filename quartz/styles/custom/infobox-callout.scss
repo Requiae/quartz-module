@@ -1,8 +1,6 @@
 @use "../base.scss";
 @use "../variables.scss" as *;
 
-$color-base: #262626;
-
 /*----infobox callout----*/
 .callout[data-callout="infobox"] {
   border: 0;

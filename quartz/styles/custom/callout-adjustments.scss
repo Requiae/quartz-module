@@ -3,6 +3,19 @@
 
 /* ---- Callout Adjustments ---- */
 
+.callout[data-callout-metadata*="noicon"] > .callout-title > .callout-icon {
+  display: none;
+}
+
+.callout[data-callout-metadata*="notitle"] > .callout-title > .callout-title-inner {
+  display: none;
+}
+
+.callout .callout-title {
+  padding-top: 0.5rem;
+  padding-bottom: 0.6rem;
+}
+
 /* --- Positioning --- */
 .callout.callout.callout[data-callout-metadata~="left"] {
   float: left;
