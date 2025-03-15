@@ -17,6 +17,7 @@ const config: QuartzConfig = {
     baseUrl: process.env.npm_package_config_baseurl ?? "requiae.github.io/",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
+    generateSocialImages: false,
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
@@ -39,7 +40,7 @@ const config: QuartzConfig = {
         },
         darkMode: {
           light: "#161618",
-          lightgray: "#393639",
+          lightgray: "#262626",
           gray: "#646464",
           darkgray: "#d4d4d4",
           dark: "#ebebec",

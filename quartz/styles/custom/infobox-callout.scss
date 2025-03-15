@@ -1,18 +1,7 @@
 @use "../base.scss";
 @use "../variables.scss" as *;
 
-/*----infobox callout----*/
-.callout[data-callout="infobox"] {
-  background-color: rgba(80, 120, 180, 0.1);
-  --callout-icon: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  float: right;
-  width: 300px;
-  margin: 0px 0px 10px 10px;
-  padding: 5px;
-}
-
-/* mobile breakpoint */
+/* mobile breakpoints */
 @media (max-width: 767px) {
   .callout[data-callout="infobox"] {
     width: 100%;
@@ -27,77 +16,87 @@
   }
 }
 
-/* stack infoboxes vertically with 'clear' */
+/*----infobox callout----*/
 .callout[data-callout="infobox"] {
+  border: 0;
+  margin: 0px 0px 0.5rem 0.5rem;
+  padding: 0;
+  border-radius: 5px;
+  background: var(--lightgray);
+  box-shadow: unset;
+  float: right;
+  width: 300px;
+
+  /* stack infoboxes vertically with 'clear' */
   clear: right;
-}
 
-/* Remove Callout Title */
-.callout[data-callout="infobox"] .callout-title {
-  display: none;
-}
+  /* Remove Callout Title */
+  > .callout-title {
+    display: none;
+  }
 
-/* H2 Title */
-.callout[data-callout="infobox"] h2 {
-  margin: auto;
-  max-width: 100%;
-  font-size: 15px;
-  text-align: center;
-  border-radius: 2px;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 4px;
-}
+  /* Alignment */
+  > .callout-content {
+    display: contents;
 
-/* H3 Title */
-.callout[data-callout="infobox"] h3 {
-  margin: auto;
-  max-width: 100%;
-  font-size: 17px;
-  text-align: center;
-  border-radius: 2px;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 4px;
-}
+    &::before {
+      display: none;
+    }
+    > p:only-child {
+      margin-block: 0;
+    }
+  }
 
-/* Spacing */
-.callout[data-callout="infobox"] p {
-  margin-block-start: 10px;
-  margin-block-end: 0px;
-  width: 100%;
-}
+  /* Inner Callout */
+  .callout {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    padding: 0.5rem 1rem;
 
-/* Image */
-.callout[data-callout="infobox"] img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 100%;
-}
+    .callout-icon {
+      display: none;
+    }
+    .callout-title {
+      padding: 0;
+    }
+    > .callout-content > p {
+      margin: 0;
+    }
+  }
 
-/* Table */
-.callout[data-callout="infobox"] table {
-  margin: auto;
-  width: 100%;
-  font-size: 16px;
-}
+  /* Image */
+  p:has(img) {
+    margin: 0;
+  }
+  img {
+    display: block;
+    margin: 0;
+    max-width: 100%;
+    border-radius: 0;
+  }
 
-.callout[data-callout="infobox"] th {
-  padding-left: 12px;
-  padding-right: 0px;
-  vertical-align: top;
-}
+  /* Table */
+  table {
+    margin: 0.3rem 0;
+    width: 100%;
+    tr {
+      border: none;
+    }
+    th {
+      display: none;
+    }
+    td {
+      border: none;
+      vertical-align: top;
+      padding: 0 1rem;
 
-.callout[data-callout="infobox"] td {
-  padding-left: 12px;
-  padding-right: 0px;
-  vertical-align: top;
-}
-
-body {
-  --image-border-color: var(--background-modifier-border);
-  --image-border-width: 1px;
-  --image-border-padding: 8px;
-  --image-border-background: var(--td);
+      &:first-child {
+        width: 25%;
+      }
+      &:not(:first-child) {
+        width: 75%;
+      }
+    }
+  }
 }
