@@ -1,19 +1,7 @@
 @use "../base.scss";
 @use "../variables.scss" as *;
 
-/*----infobox callout----*/
-.callout[data-callout="infobox"] {
-  border: 0;
-  margin: 0px 0px 0.5rem 0.5rem;
-  padding: 0;
-  border-radius: 5px;
-  background: var(--lightgray);
-  box-shadow: unset;
-  float: right;
-  width: 300px;
-}
-
-/* mobile breakpoint */
+/* mobile breakpoints */
 @media (max-width: 767px) {
   .callout[data-callout="infobox"] {
     width: 100%;
@@ -28,72 +16,87 @@
   }
 }
 
-/* stack infoboxes vertically with 'clear' */
+/*----infobox callout----*/
 .callout[data-callout="infobox"] {
-  clear: right;
-}
-
-/* Remove Callout Title */
-.callout[data-callout="infobox"] > .callout-title {
-  display: none;
-}
-.callout[data-callout="infobox"] > .callout-content {
-  display: contents;
-}
-.callout[data-callout="infobox"] > .callout-content::before {
-  display: none;
-}
-.callout[data-callout="infobox"] > .callout-content > p:only-child {
-  margin-block: 0;
-}
-
-/* Inner Callout */
-.callout[data-callout="infobox"] .callout {
-  margin: 0;
-  border-radius: 0;
-  border: none;
-  padding: 0.5rem 1rem;
-}
-.callout[data-callout="infobox"] .callout .callout-icon {
-  display: none;
-}
-.callout[data-callout="infobox"] .callout .callout-title {
+  border: 0;
+  margin: 0px 0px 0.5rem 0.5rem;
   padding: 0;
-}
-.callout[data-callout="infobox"] .callout > .callout-content > p {
-  margin: 0;
-}
+  border-radius: 5px;
+  background: var(--lightgray);
+  box-shadow: unset;
+  float: right;
+  width: 300px;
 
-/* Image */
-.callout[data-callout="infobox"] p:has(img) {
-  margin: 0;
-}
-.callout[data-callout="infobox"] img {
-  display: block;
-  margin: 0;
-  max-width: 100%;
-  border-radius: 0;
-}
+  /* stack infoboxes vertically with 'clear' */
+  clear: right;
 
-/* Table */
-.callout[data-callout="infobox"] table {
-  margin: 0.3rem 0;
-  width: 100%;
-}
-.callout[data-callout="infobox"] table tr {
-  border: none;
-}
-.callout[data-callout="infobox"] table tr th {
-  display: none;
-}
-.callout[data-callout="infobox"] table tr td {
-  border: none;
-  vertical-align: top;
-  padding: 0 1rem;
-}
-.callout[data-callout="infobox"] table tr td:first-child {
-  width: 25%;
-}
-.callout[data-callout="infobox"] table tr td:not(:first-child) {
-  width: 75%;
+  /* Remove Callout Title */
+  > .callout-title {
+    display: none;
+  }
+
+  /* Alignment */
+  > .callout-content {
+    display: contents;
+
+    &::before {
+      display: none;
+    }
+    > p:only-child {
+      margin-block: 0;
+    }
+  }
+
+  /* Inner Callout */
+  .callout {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    padding: 0.5rem 1rem;
+
+    .callout-icon {
+      display: none;
+    }
+    .callout-title {
+      padding: 0;
+    }
+    > .callout-content > p {
+      margin: 0;
+    }
+  }
+
+  /* Image */
+  p:has(img) {
+    margin: 0;
+  }
+  img {
+    display: block;
+    margin: 0;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  /* Table */
+  table {
+    margin: 0.3rem 0;
+    width: 100%;
+    tr {
+      border: none;
+    }
+    th {
+      display: none;
+    }
+    td {
+      border: none;
+      vertical-align: top;
+      padding: 0 1rem;
+
+      &:first-child {
+        width: 25%;
+      }
+      &:not(:first-child) {
+        width: 75%;
+      }
+    }
+  }
 }
