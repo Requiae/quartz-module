@@ -6,11 +6,10 @@ $color-base: #262626;
 /*----infobox callout----*/
 .callout[data-callout="infobox"] {
   border: 0;
-  margin: 0px 0px 10px 10px;
+  margin: 0px 0px 0.5rem 0.5rem;
   padding: 0;
-  padding-inline: 0;
   border-radius: 5px;
-  background: $color-base;
+  background: var(--lightgray);
   box-shadow: unset;
   float: right;
   width: 300px;
@@ -52,11 +51,10 @@ $color-base: #262626;
 
 /* Inner Callout */
 .callout[data-callout="infobox"] .callout {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
   border-radius: 0;
-  padding: 0.5rem;
-  padding-left: 1rem;
+  border: none;
+  padding: 0.5rem 1rem;
 }
 .callout[data-callout="infobox"] .callout .callout-icon {
   display: none;
@@ -74,18 +72,18 @@ $color-base: #262626;
 }
 .callout[data-callout="infobox"] img {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
   max-width: 100%;
   border-radius: 0;
 }
 
 /* Table */
 .callout[data-callout="infobox"] table {
-  margin: 0;
+  margin: 0.3rem 0;
   width: 100%;
+}
+.callout[data-callout="infobox"] table tr {
+  border: none;
 }
 .callout[data-callout="infobox"] table tr th {
   display: none;
@@ -93,7 +91,7 @@ $color-base: #262626;
 .callout[data-callout="infobox"] table tr td {
   border: none;
   vertical-align: top;
-  padding: 0.3rem 1rem;
+  padding: 0 1rem;
 }
 .callout[data-callout="infobox"] table tr td:first-child {
   width: 25%;
