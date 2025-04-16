@@ -1,0 +1,36 @@
+// indicate folder more clearly
+.page-listing {
+  li.section-li:has(.section .desc a.internal[href$="/"]) {
+    .meta {
+      // choose one:
+      // hides date, removes indent
+      // display: none;
+      // hides date, keep indent
+      visibility: hidden;
+      width: 0;
+      white-space: nowrap;
+    }
+    .desc {
+      a.internal {
+        // prepend folder emoji
+        &:before {
+          content: " ";
+          display: inline-block;
+          background-color: var(--secondary);
+          mask-image: url(../static/directory-icon.svg);
+          mask-repeat: no-repeat;
+          mask-size: auto 1.6rem;
+          width: 2rem;
+          height: 1.6rem;
+          vertical-align: -25%;
+        }
+
+        &:hover {
+          &:before {
+            background-color: var(--tertiary);
+          }
+        }
+      }
+    }
+  }
+}
