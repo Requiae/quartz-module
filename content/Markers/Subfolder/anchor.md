@@ -6,6 +6,9 @@ marker:
   y: 5
   icon: anchor
   colour: orange
+tags:
+  - testTag1
+  - testTag2
 ---
 
 Just a file to place the anchor marker
