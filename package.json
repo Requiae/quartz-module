@@ -21,6 +21,9 @@
     "sync": "npx quartz sync",
     "serve": "npx quartz build --serve"
   },
+  "config": {
+    "folders": "A, C"
+  },
   "engines": {
     "npm": ">=9.3.1",
     "node": "20 || >=22"

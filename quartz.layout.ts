@@ -1,6 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg";
 import * as Component from "./quartz/components";
-import { sortFn } from "./quartz/util/customsort";
+import { sortFnFactory } from "./quartz/util/customsort";
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -26,7 +26,10 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.Explorer({ useSavedState: true, sortFn: sortFn }),
+    Component.Explorer({
+      useSavedState: true,
+      sortFn: sortFnFactory(process.env.npm_package_config_folders),
+    }),
   ],
   right: [
     Component.Graph(),
@@ -47,7 +50,10 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.Explorer({ useSavedState: false, sortFn: sortFn }),
+    Component.Explorer({
+      useSavedState: false,
+      sortFn: sortFnFactory(process.env.npm_package_config_folders),
+    }),
   ],
   right: [],
 };
