@@ -8,7 +8,9 @@ export const sharedPageComponents: SharedLayout = {
   header: [],
   afterBody: [],
   footer: Component.Footer({
-    links: { GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae" },
+    links: {
+      GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae",
+    },
   }),
 };
 
@@ -34,6 +36,7 @@ export const defaultContentPageLayout: PageLayout = {
           grow: true,
         },
         { Component: Component.Darkmode() },
+        { Component: Component.ReaderMode() },
       ],
     }),
     Component.Explorer({

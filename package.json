@@ -40,11 +40,12 @@
     "quartz": "./quartz/bootstrap-cli.mjs"
   },
   "dependencies": {
-    "@clack/prompts": "^0.10.0",
+    "@clack/prompts": "^0.10.1",
     "@floating-ui/dom": "^1.6.13",
     "@myriaddreamin/rehype-typst": "^0.5.4",
     "@napi-rs/simple-git": "0.1.19",
     "@tweenjs/tween.js": "^25.0.0",
+    "@webgpu/types": "^0.1.60",
     "ansi-truncate": "^1.2.0",
     "async-mutex": "^0.5.0",
     "chalk": "^5.4.1",
@@ -111,7 +112,7 @@
     "@types/hast": "^3.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/leaflet": "^1.9.12",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.14.1",
     "@types/pretty-time": "^1.1.5",
     "@types/source-map-support": "^0.5.10",
     "@types/ws": "^8.18.1",
