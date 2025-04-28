@@ -22,7 +22,7 @@
     "serve": "npx quartz build --serve"
   },
   "config": {
-    "folders": "A, C"
+    "title": "Test Title"
   },
   "engines": {
     "npm": ">=9.3.1",

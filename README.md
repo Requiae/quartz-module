@@ -29,6 +29,7 @@ Original code found on https://github.com/jackyzha0/quartz
 - Go through the changes and ensure none of the changes undo custom code, otherwise you'll need to do some manual work. Below is a non-exhaustive list of file to check:
   - `quartz/components/pages/Content.tsx`
   - `quartz/components/Head.tsx`
+  - `quartz/plugins/emitters/contentIndex.tsx`
   - `quartz/styles/custom.scss`
 - Commit and make a PR
 

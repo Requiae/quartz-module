@@ -6,6 +6,7 @@ marker:
   y: 5
   icon: shield
   colour: yellow
+priority: 1
 ---
 
 Just a file to place the shield marker
