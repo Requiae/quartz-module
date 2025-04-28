@@ -6,7 +6,7 @@ marker:
   y: 5
   icon: star
   colour: blue
-priority: 2
+priority: 4
 ---
 
 Just a file to place the star marker
