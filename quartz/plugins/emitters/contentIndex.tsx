@@ -8,7 +8,10 @@ import { toHtml } from "hast-util-to-html";
 import { write } from "./helpers";
 import { i18n } from "../../i18n";
 
-/* Contains Custom Code */
+/*****************************************
+ * HAS CUSTOMISED CODE
+ ****************************************/
+
 /* Custom Code Start */
 import { QuartzPluginData } from "../vfile";
 /* Custom Code End */
