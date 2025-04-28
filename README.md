@@ -29,6 +29,7 @@ Original code found on https://github.com/jackyzha0/quartz
 - Go through the changes and ensure none of the changes undo custom code, otherwise you'll need to do some manual work. Below is a non-exhaustive list of file to check:
   - `quartz/components/pages/Content.tsx`
   - `quartz/components/Head.tsx`
+  - `quartz/plugins/emitters/contentIndex.tsx`
   - `quartz/styles/custom.scss`
 - Commit and make a PR
 
@@ -42,20 +43,20 @@ npm run serve
 
 ## Custom frontmatter
 
-| Item           | Type    | Explanation                                                                                                                                  |
-| -------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| prioritise     | boolean | Whether this page should appear above maps in the explorer                                                                                   |
-| map            | object  | Custom object containing marker information Whether this page should show the campaign map                                                   |
-| map.name       | string  | Name of the map                                                                                                                              |
-| map.path       | string  | Path to the map image where the content folder is the root                                                                                   |
-| map.minZoom    | number  | The minimum zoom the map allows                                                                                                              |
-| map.maxZoom    | number  | The maximum zoom the map allows                                                                                                              |
-| marker         | object  | Custom object containing marker information                                                                                                  |
-| marker.x       | number  | (Integer) Marker x coordinate                                                                                                                |
-| marker.y       | number  | (Integer) Marker y coordinate                                                                                                                |
-| marker.icon    | string  | `anchor`, `anvil`, `bed`, `branch`, `camp`, `capitol`, `cauldron`, `diner`, `farm`, `shield`, `star`, `subway`, `town`, `tree`, `university` |
-| marker.colour  | string  | (Optional, defaults to `blue`) `green`, `lime`, `yellow`, `pink`, `blue`, `lightblue`, `brown`, `orange`, `red`, `purple`                    |
-| marker.minZoom | number  | (Optional Integer) The minimum zoom from which the marker is shown on the map                                                                |
+| Item           | Type   | Explanation                                                                                                                                  |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| priority       | number | Higher number gives node a higher priority in the explorer, this supersedes folders having priority over notes                               |
+| map            | object | Custom object containing marker information Whether this page should show the campaign map                                                   |
+| map.name       | string | Name of the map                                                                                                                              |
+| map.path       | string | Path to the map image where the content folder is the root                                                                                   |
+| map.minZoom    | number | The minimum zoom the map allows                                                                                                              |
+| map.maxZoom    | number | The maximum zoom the map allows                                                                                                              |
+| marker         | object | Custom object containing marker information                                                                                                  |
+| marker.x       | number | (Integer) Marker x coordinate                                                                                                                |
+| marker.y       | number | (Integer) Marker y coordinate                                                                                                                |
+| marker.icon    | string | `anchor`, `anvil`, `bed`, `branch`, `camp`, `capitol`, `cauldron`, `diner`, `farm`, `shield`, `star`, `subway`, `town`, `tree`, `university` |
+| marker.colour  | string | (Optional, defaults to `blue`) `green`, `lime`, `yellow`, `pink`, `blue`, `lightblue`, `brown`, `orange`, `red`, `purple`                    |
+| marker.minZoom | number | (Optional Integer) The minimum zoom from which the marker is shown on the map                                                                |
 
 > A marker requires `title`, `marker.x`, `marker.x`, and `marker.icon` to be set.
 

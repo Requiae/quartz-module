@@ -8,6 +8,14 @@ import { toHtml } from "hast-util-to-html";
 import { write } from "./helpers";
 import { i18n } from "../../i18n";
 
+/*****************************************
+ * HAS CUSTOMISED CODE
+ ****************************************/
+
+/* Custom Code Start */
+import { QuartzPluginData } from "../vfile";
+/* Custom Code End */
+
 export type ContentIndexMap = Map<FullSlug, ContentDetails>;
 export type ContentDetails = {
   slug: FullSlug;
@@ -16,6 +24,9 @@ export type ContentDetails = {
   links: SimpleSlug[];
   tags: string[];
   content: string;
+  /* Custom Code Start */
+  frontmatter: QuartzPluginData["frontmatter"];
+  /* Custom Code End */
   richContent?: string;
   date?: Date;
   description?: string;
@@ -110,6 +121,9 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
             links: file.data.links ?? [],
             tags: file.data.frontmatter?.tags ?? [],
             content: file.data.text ?? "",
+            /* Custom Code Start */
+            frontmatter: file.data.frontmatter,
+            /* Custom Code End */
             richContent: opts?.rssFullHtml
               ? escapeHTML(toHtml(tree as Root, { allowDangerousHtml: true }))
               : undefined,
