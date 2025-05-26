@@ -1,10 +1,15 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types";
+import {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "../../components/types";
 
 // @ts-ignore: typescript doesn't know about our inline bundling system
 // so we need to silence the error
 import mapScript from "./scripts/map.inline";
 import mapStyles from "./styles/map.scss";
-import { QuartzPluginData } from "../plugins/vfile";
+import { QuartzPluginData } from "../../plugins/vfile";
+import { JSXInternal } from "preact/src/jsx";
 
 enum MarkerColour {
   green = "green",
@@ -104,50 +109,52 @@ function isFrontmatterMapData(object: any): object is FrontmatterMapData {
   return true;
 }
 
-export default ((ignore: boolean = false) => {
-  function buildMarker(file: QuartzPluginData, mapData: FrontmatterMapData): Marker | undefined {
-    const { slug, frontmatter } = file;
-    const markerData = frontmatter?.marker;
+function buildMarkerData(file: QuartzPluginData, mapData: FrontmatterMapData): Marker | undefined {
+  const { slug, frontmatter } = file;
+  const markerData = frontmatter?.marker;
 
-    if (!slug || !frontmatter || !frontmatter?.title || !isFrontmatterMarkerData(markerData)) {
-      return undefined;
-    }
-
-    return {
-      name: frontmatter.title,
-      mapName: markerData.mapName,
-      link: slug,
-      position: { x: parseInt(markerData.x), y: parseInt(markerData.y) },
-      icon: markerData.icon,
-      colour: markerData.colour ?? MarkerColour.blue,
-      minZoom: markerData.minZoom ? parseInt(markerData.minZoom) : mapData.minZoom,
-    };
+  if (!slug || !frontmatter || !frontmatter?.title || !isFrontmatterMarkerData(markerData)) {
+    return undefined;
   }
 
-  const MarkerComponent = (marker: Marker, index: number) => {
-    return (
-      <div
-        class={"marker"}
-        key={index}
-        data-name={marker.name}
-        data-link={`../${marker.link}`}
-        data-pos-x={marker.position.x}
-        data-pos-y={marker.position.y}
-        data-icon={marker.icon}
-        data-colour={marker.colour}
-        data-min-zoom={marker.minZoom}
-      />
-    );
+  return {
+    name: frontmatter.title,
+    mapName: markerData.mapName,
+    link: slug,
+    position: { x: parseInt(markerData.x), y: parseInt(markerData.y) },
+    icon: markerData.icon,
+    colour: markerData.colour ?? MarkerColour.blue,
+    minZoom: markerData.minZoom ? parseInt(markerData.minZoom) : mapData.minZoom,
   };
+}
 
-  const Map: QuartzComponent = (props: QuartzComponentProps) => {
+function buildMarkerComponent(marker: Marker, index: number): JSXInternal.Element {
+  return (
+    <div
+      class={"marker"}
+      key={index}
+      data-name={marker.name}
+      data-link={`../${marker.link}`}
+      data-pos-x={marker.position.x}
+      data-pos-y={marker.position.y}
+      data-icon={marker.icon}
+      data-colour={marker.colour}
+      data-min-zoom={marker.minZoom}
+    />
+  );
+}
+
+function MapConstructor(opts: object | undefined) {
+  const ignore = (opts as any)?.ignore || undefined;
+
+  const map: QuartzComponent = (props: QuartzComponentProps) => {
     const mapData = props.fileData.frontmatter?.map;
     if (!props.fileData.frontmatter || !isFrontmatterMapData(mapData) || ignore) {
       return <></>;
     }
 
     const markers = props.allFiles
-      .map((file) => buildMarker(file, mapData))
+      .map((file) => buildMarkerData(file, mapData))
       .filter((marker) => marker !== undefined)
       .filter((marker) => marker.mapName?.toLowerCase() === mapData.name?.toLowerCase());
     return (
@@ -155,17 +162,20 @@ export default ((ignore: boolean = false) => {
         <h2 id="map">Map</h2>
         <div
           id="leaflet-map"
-          data-url={`../${mapData.path}`}
+          data-url={`${mapData.path}`}
           data-min-zoom={mapData.minZoom}
           data-max-zoom={mapData.maxZoom}
         />
-        {markers.map((object, i) => MarkerComponent(object, i))}
+        {markers.map((object, i) => buildMarkerComponent(object, i))}
       </div>
     );
   };
 
-  Map.afterDOMLoaded = mapScript;
-  Map.css = mapStyles;
+  map.afterDOMLoaded = mapScript;
+  map.css = mapStyles;
 
-  return Map;
-}) satisfies QuartzComponentConstructor;
+  return map;
+}
+
+export default ((opts: object | undefined = undefined) =>
+  MapConstructor(opts)) satisfies QuartzComponentConstructor;

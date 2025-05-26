@@ -1,6 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg";
 import * as Component from "./quartz/components";
-import { customSortFn } from "./quartz/util/customsort";
+import { customSortFn, MapComponent } from "./quartz/custom";
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -24,7 +24,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta({ showReadingTime: false }),
     Component.TagList(),
-    Component.MapConstructor(true),
+    MapComponent(),
   ],
   left: [
     Component.PageTitle(),
@@ -57,6 +57,7 @@ export const defaultListPageLayout: PageLayout = {
     Component.Breadcrumbs(),
     Component.ArticleTitle(),
     Component.ContentMeta({ showReadingTime: false }),
+    MapComponent(),
   ],
   left: [
     Component.PageTitle(),

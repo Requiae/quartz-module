@@ -1,4 +1,4 @@
-import { Options } from "./../components/Explorer";
+import { Options } from "../../components/Explorer";
 
 export const customSortFn: Options["sortFn"] = (a, b) => {
   if (b.data?.frontmatter?.priority) {

@@ -41,7 +41,7 @@ function buildIcon(icon: string, colour: string): DivIcon {
           <path d="m233.29 0c-85.1 0-154.33 69.234-154.33 154.33 0 34.275 21.887 90.155 66.908 170.83 31.846 57.063 63.168 104.64 64.484 106.64l22.942 34.775 22.941-34.774c1.317-1.998 32.641-49.577 64.483-106.64 45.023-80.68 66.908-136.56 66.908-170.83 1e-3 -85.1-69.233-154.33-154.33-154.33z"/>
         </g>
       </svg>
-      <img class='icon' src='../static/markers/${icon}.svg'>
+      <img class='icon' src='${window.location.origin}/static/markers/${icon}.svg'>
     `,
     iconSize: [32, 48],
     iconAnchor: [16, 48],
@@ -122,7 +122,9 @@ async function initialiseMap(
     return;
   }
 
-  const image = await getMeta(dataset.url);
+  const url = `${window.location.origin}/${dataset.url}`;
+
+  const image = await getMeta(url);
 
   mapElement.style.aspectRatio = (image.naturalWidth / image.naturalHeight).toString();
 
@@ -138,7 +140,7 @@ async function initialiseMap(
     maxZoom: parseInt(dataset.maxZoom),
   });
 
-  imageOverlay(dataset.url, bounds).addTo(mapItem);
+  imageOverlay(url, bounds).addTo(mapItem);
 
   mapItem.fitBounds(bounds);
   markers.map((marker) => addMarker(marker, mapItem));
