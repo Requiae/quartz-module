@@ -33,7 +33,7 @@ jobs:
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: quartz-module/public
+          path: public
 
   deploy:
     needs: build
