@@ -27,12 +27,13 @@ interface MarkerDataSet {
 }
 
 interface MapDataSet {
+  base: string;
   url: string;
   minZoom: string;
   maxZoom: string;
 }
 
-function buildIcon(icon: string, colour: string): DivIcon {
+function buildIcon(path: string, colour: string): DivIcon {
   return divIcon({
     className: "custom-div-icon",
     html: `
@@ -41,7 +42,7 @@ function buildIcon(icon: string, colour: string): DivIcon {
           <path d="m233.29 0c-85.1 0-154.33 69.234-154.33 154.33 0 34.275 21.887 90.155 66.908 170.83 31.846 57.063 63.168 104.64 64.484 106.64l22.942 34.775 22.941-34.774c1.317-1.998 32.641-49.577 64.483-106.64 45.023-80.68 66.908-136.56 66.908-170.83 1e-3 -85.1-69.233-154.33-154.33-154.33z"/>
         </g>
       </svg>
-      <img class='icon' src='${window.location.origin}/static/markers/${icon}.svg'>
+      <img class='icon' src='${path}'>
     `,
     iconSize: [32, 48],
     iconAnchor: [16, 48],
@@ -55,12 +56,13 @@ function getMarkerOnClick(url: string): LeafletMouseEventHandlerFn {
   };
 }
 
-function addMarker(markerData: MarkerDataSet, mapItem: Map): void {
+function addMarker(markerData: MarkerDataSet, mapItem: Map, baseUrl: string): void {
   function addMarkerWhenZoom(markerItem: Marker, mapItem: Map, markerZoom: number) {
     mapItem.getZoom() >= markerZoom ? markerItem.addTo(mapItem) : markerItem.remove();
   }
 
-  const options: MarkerOptions = { icon: buildIcon(markerData.icon, markerData.colour) };
+  const path = `${baseUrl}static/markers/${markerData.icon}.svg`;
+  const options: MarkerOptions = { icon: buildIcon(path, markerData.colour) };
 
   const markerZoom = parseInt(markerData.minZoom);
   const markerItem = marker([parseInt(markerData.posY), parseInt(markerData.posX)], options)
@@ -87,7 +89,7 @@ function isMarkerDataSet(dataset: any): dataset is MarkerDataSet {
 }
 
 function isMapDataSet(dataset: any): dataset is MapDataSet {
-  if (!dataset["url"] || !dataset["minZoom"] || !dataset["maxZoom"]) {
+  if (!dataset["base"] || !dataset["url"] || !dataset["minZoom"] || !dataset["maxZoom"]) {
     return false;
   }
   return true;
@@ -122,8 +124,6 @@ async function initialiseMap(
     return;
   }
 
-  console.log(dataset.url);
-
   const image = await getMeta(dataset.url);
 
   mapElement.style.aspectRatio = (image.naturalWidth / image.naturalHeight).toString();
@@ -143,7 +143,7 @@ async function initialiseMap(
   imageOverlay(dataset.url, bounds).addTo(mapItem);
 
   mapItem.fitBounds(bounds);
-  markers.map((marker) => addMarker(marker, mapItem));
+  markers.map((marker) => addMarker(marker, mapItem, dataset.base));
 
   return mapItem;
 }
