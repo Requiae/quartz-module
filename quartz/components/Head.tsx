@@ -5,11 +5,6 @@ import { googleFontHref, googleFontSubsetHref } from "../util/theme";
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types";
 import { unescapeHTML } from "../util/escape";
 import { CustomOgImagesEmitterName } from "../plugins/emitters/ogImage";
-
-/*****************************************
- * HAS CUSTOMISED CODE
- ****************************************/
-
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
@@ -54,17 +49,10 @@ export default (() => {
               <link rel="stylesheet" href={googleFontSubsetHref(cfg.theme, cfg.pageTitle)} />
             )}
           </>
-        )}{" "}
-        {/* Customised Code Start */}
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossOrigin="anonymous"
-        />
-        {/* Customised Code End */}
+        )}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <meta name="og:site_name" content={cfg.pageTitle}></meta>
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
@@ -73,6 +61,7 @@ export default (() => {
         <meta name="twitter:description" content={description} />
         <meta property="og:description" content={description} />
         <meta property="og:image:alt" content={description} />
+
         {!usesCustomOgImage && (
           <>
             <meta property="og:image" content={ogImageDefaultPath} />
@@ -84,6 +73,7 @@ export default (() => {
             />
           </>
         )}
+
         {cfg.baseUrl && (
           <>
             <meta property="twitter:domain" content={cfg.baseUrl}></meta>
@@ -91,9 +81,11 @@ export default (() => {
             <meta property="twitter:url" content={socialUrl}></meta>
           </>
         )}
+
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
           .filter((resource) => resource.loadTime === "beforeDOMReady")

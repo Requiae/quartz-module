@@ -1,5 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg";
 import * as Plugin from "./quartz/plugins";
+import * as Custom from "./quartz/custom";
 
 /**
  * Quartz 4 Configuration
@@ -70,6 +71,7 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
+      Custom.Leaflet(),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
