@@ -122,6 +122,8 @@ async function initialiseMap(
     return;
   }
 
+  console.log(dataset.url);
+
   const image = await getMeta(dataset.url);
 
   mapElement.style.aspectRatio = (image.naturalWidth / image.naturalHeight).toString();
