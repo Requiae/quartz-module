@@ -1,1 +1,1 @@
-export * from "./transformers";
+export * as transformers from "./transformers";

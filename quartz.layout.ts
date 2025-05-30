@@ -1,12 +1,12 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg";
 import * as Component from "./quartz/components";
-import { customSortFn, MapComponent } from "./quartz/custom";
+import * as Custom from "./quartz/custom";
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [MapComponent()],
+  afterBody: [Custom.components.MapComponent()],
   footer: Component.Footer({
     links: {
       GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae",
@@ -40,7 +40,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.Explorer({
       useSavedState: true,
-      sortFn: customSortFn,
+      sortFn: Custom.util.customSortFn,
     }),
   ],
   right: [
@@ -71,7 +71,7 @@ export const defaultListPageLayout: PageLayout = {
     }),
     Component.Explorer({
       useSavedState: false,
-      sortFn: customSortFn,
+      sortFn: Custom.util.customSortFn,
     }),
   ],
   right: [],
