@@ -14,7 +14,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: { provider: "plausible" },
     locale: "en-GB",
-    baseUrl: process.env.npm_package_config_baseurl ?? "requiae.github.io/",
+    baseUrl: process.env.npm_package_config_baseurl ?? "https://requiae.github.io/quartz-module/",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {

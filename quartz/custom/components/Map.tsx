@@ -153,6 +153,10 @@ function MapConstructor(opts: object | undefined) {
       return <></>;
     }
 
+    console.log(props);
+    const baseUrl = props.cfg.baseUrl ?? "";
+    const url = `${baseUrl}${baseUrl.endsWith("/") ? "" : "/"}${mapData.path}`;
+
     const markers = props.allFiles
       .map((file) => buildMarkerData(file, mapData))
       .filter((marker) => marker !== undefined)
@@ -162,7 +166,7 @@ function MapConstructor(opts: object | undefined) {
         <h2 id="map">Map</h2>
         <div
           id="leaflet-map"
-          data-url={`${mapData.path}`}
+          data-url={`${url}`}
           data-min-zoom={mapData.minZoom}
           data-max-zoom={mapData.maxZoom}
         />

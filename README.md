@@ -63,3 +63,7 @@ npm run serve
 ## Custom CSS
 
 We also make use to the the same css [this wiki](https://morrowind-modding.github.io/contributing/custom-formatting-features) uses.
+
+## Adding a new map image
+
+Due to limitations currently present in Quartz it was not possible to add maps to nested folders. To circumvent this we always try to GET the image from the `baseUrl` set in `quartz.config.ts` or your `package.json`. During development you might need to temporarily set this to `http://localhost:8080/` if the map does not load.

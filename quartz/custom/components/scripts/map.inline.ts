@@ -122,9 +122,7 @@ async function initialiseMap(
     return;
   }
 
-  const url = `${window.location.origin}/${dataset.url}`;
-
-  const image = await getMeta(url);
+  const image = await getMeta(dataset.url);
 
   mapElement.style.aspectRatio = (image.naturalWidth / image.naturalHeight).toString();
 
@@ -140,7 +138,7 @@ async function initialiseMap(
     maxZoom: parseInt(dataset.maxZoom),
   });
 
-  imageOverlay(url, bounds).addTo(mapItem);
+  imageOverlay(dataset.url, bounds).addTo(mapItem);
 
   mapItem.fitBounds(bounds);
   markers.map((marker) => addMarker(marker, mapItem));

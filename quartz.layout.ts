@@ -6,7 +6,7 @@ import { customSortFn, MapComponent } from "./quartz/custom";
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [MapComponent()],
   footer: Component.Footer({
     links: {
       GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae",
@@ -24,7 +24,6 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta({ showReadingTime: false }),
     Component.TagList(),
-    MapComponent(),
   ],
   left: [
     Component.PageTitle(),
@@ -57,7 +56,6 @@ export const defaultListPageLayout: PageLayout = {
     Component.Breadcrumbs(),
     Component.ArticleTitle(),
     Component.ContentMeta({ showReadingTime: false }),
-    MapComponent(),
   ],
   left: [
     Component.PageTitle(),
