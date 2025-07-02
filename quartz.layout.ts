@@ -6,7 +6,7 @@ import * as Custom from "./quartz/custom";
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [Custom.components.MapComponent()],
+  afterBody: [],
   footer: Component.Footer({
     links: {
       GitHub: process.env.npm_package_config_github ?? "https://github.com/Requiae",
