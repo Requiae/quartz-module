@@ -119,7 +119,7 @@ function buildMarkerObject(marker: Marker, distance: number): Element {
     properties: {
       class: ["leaflet-marker"],
       "data-name": marker.name,
-      "data-link": `${"../".repeat(distance)}${marker.link}`,
+      "data-link": `./${"../".repeat(distance)}${marker.link}`,
       "data-pos-x": marker.position.x,
       "data-pos-y": marker.position.y,
       "data-icon": marker.icon,
@@ -195,7 +195,7 @@ export const Leaflet: QuartzTransformerPlugin = () => ({
             const markers = LEAFLET_MAP_PLUGIN_DATA.markerMap[mapName] ?? [];
 
             // Fix slug based navigation based on distance to root
-            const distanceToRoot = (file.data.filePath ?? "/").split("/").length - 1; // deduct root directory from distance
+            const distanceToRoot = (file.data.filePath ?? "/").split("/").length - 2; // Deduct root directory and current page from distance
 
             // Build the new leaflet element
             const leafletContainer: Element = {
@@ -354,6 +354,7 @@ function buildIcon(icon, colour) {
 
 function getMarkerOnClick(url) {
   return (_event) => {
+    console.log(url);
     window.location.href = \`\${url}\`;
   };
 }
