@@ -4,7 +4,7 @@ marker:
   mapName: Test
   x: 100
   y: 5
-  icon: shield
+  icon: mdi:shield-half-full
   colour: yellow
 priority: 2
 ---

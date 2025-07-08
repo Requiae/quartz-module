@@ -4,7 +4,7 @@ marker:
   mapName: Test
   x: 340
   y: 5
-  icon: anvil
+  icon: mdi:anvil
   colour: red
   minZoom: 1
 ---
