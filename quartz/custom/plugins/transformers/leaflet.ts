@@ -4,31 +4,34 @@ import { visit } from "unist-util-visit";
 import { VFile } from "vfile";
 import { Element } from "hast";
 
+// Data stored across several invocations of this plugin
 const LEAFLET_MAP_PLUGIN_DATA: {
   markerMap: { [key: string]: Marker[] };
 } = {
   markerMap: {},
 };
 
-enum MarkerColour {
-  green = "green",
-  lime = "lime",
-  yellow = "yellow",
-  pink = "pink",
-  blue = "blue",
-  lightblue = "lightblue",
-  brown = "brown",
-  orange = "orange",
-  red = "red",
-  purple = "purple",
-}
+// Predefined colours used by the plugin
+const markerColourMap = {
+  green: "#039c4b",
+  lime: "#66d313",
+  yellow: "#e2c505",
+  pink: "#ff0984",
+  blue: "#21409a",
+  lightblue: "#04adff",
+  brown: "#e48873",
+  orange: "#f16623",
+  red: "#f44546",
+  purple: "#7623a5",
+};
+type MarkerColour = keyof typeof markerColourMap;
 
 interface Marker {
   name: string;
   link: string;
   position: { x: number; y: number };
-  icon: MarkerIcon;
-  colour: MarkerColour;
+  icon: string;
+  colour: string;
   minZoom: number;
 }
 
@@ -37,7 +40,7 @@ interface FrontmatterMarkerData {
   x: string;
   y: string;
   icon: string;
-  colour: MarkerColour | undefined;
+  colour: MarkerColour | string | undefined;
   minZoom: string;
 }
 
@@ -58,12 +61,28 @@ function isFrontmatterMarkerData(object: any): object is FrontmatterMarkerData {
     return true;
   }
 
-  // Unknown colours however are not accepted
-  if (!Object.values(MarkerColour).includes(object.colour)) {
+  // We only accept predefined and hex colours
+  const testColourValue = object.colour.toLowerCase();
+  if (
+    !Object.keys(markerColourMap).includes(testColourValue) &&
+    !/([0-9A-F]{3}){1,2}$/i.test(testColourValue)
+  ) {
     return false;
   }
 
   return true;
+}
+
+function getColourValue(colour: MarkerColour | string | undefined): string {
+  if (!colour) {
+    return markerColourMap.blue;
+  }
+
+  const unparsedColourValue = colour.toLowerCase();
+  if (Object.keys(markerColourMap).includes(unparsedColourValue)) {
+    return markerColourMap[unparsedColourValue as MarkerColour];
+  }
+  return `#${unparsedColourValue.toLowerCase()}`;
 }
 
 function buildMarkerData(file: VFile): void {
@@ -84,7 +103,7 @@ function buildMarkerData(file: VFile): void {
     link: slug,
     position: { x: parseInt(markerData.x), y: parseInt(markerData.y) },
     icon: markerData.icon,
-    colour: markerData.colour ?? MarkerColour.blue,
+    colour: getColourValue(markerData.colour),
     minZoom: markerData.minZoom ? parseInt(markerData.minZoom) : -1,
   });
 }
@@ -220,7 +239,7 @@ export const Leaflet: QuartzTransformerPlugin = () => ({
   }
 }
 
-/* to align icon */
+/* to align and colour icon */
 .custom-div-icon .icon {
   position: absolute;
   width: 32px;
@@ -246,46 +265,6 @@ export const Leaflet: QuartzTransformerPlugin = () => ({
   margin: 0px auto;
   z-index: inherit;
 }
-
-.custom-div-icon .marker.green {
-  fill: #039c4b;
-}
-
-.custom-div-icon .marker.lime {
-  fill: #66d313;
-}
-
-.custom-div-icon .marker.yellow {
-  fill: #e2c505;
-}
-
-.custom-div-icon .marker.pink {
-  fill: #ff0984;
-}
-
-.custom-div-icon .marker.blue {
-  fill: #21409a;
-}
-
-.custom-div-icon .marker.lightblue {
-  fill: #04adff;
-}
-
-.custom-div-icon .marker.brown {
-  fill: #e48873;
-}
-
-.custom-div-icon .marker.orange {
-  fill: #f16623;
-}
-
-.custom-div-icon .marker.red {
-  fill: #f44546;
-}
-
-.custom-div-icon .marker.purple {
-  fill: #7623a5;
-}
         `,
         },
       ],
@@ -308,7 +287,7 @@ function buildIcon(icon, colour) {
   return L.divIcon({
     className: "custom-div-icon",
     html: \`
-      <svg class='marker \${colour}' width="32" height="48" viewBox="0 0 233.29 349.94"">
+      <svg class="marker" style="fill:\${colour}" width="32" height="48" viewBox="0 0 233.29 349.94"">
         <g transform="matrix(.75581 0 0 .75 -59.677 -.00049655)">
           <path d="m233.29 0c-85.1 0-154.33 69.234-154.33 154.33 0 34.275 21.887 90.155 66.908 170.83 31.846 57.063 63.168 104.64 64.484 106.64l22.942 34.775 22.941-34.774c1.317-1.998 32.641-49.577 64.483-106.64 45.023-80.68 66.908-136.56 66.908-170.83 1e-3 -85.1-69.233-154.33-154.33-154.33z"/>
         </g>

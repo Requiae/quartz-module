@@ -5,7 +5,7 @@ marker:
   x: 20
   y: 55
   icon: branch
-  colour: green
+  colour: ff0000
 ---
 
 Just a file to place the branch marker
