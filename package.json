@@ -19,7 +19,8 @@
     "test": "tsx --test",
     "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1",
     "sync": "npx quartz sync",
-    "serve": "npx quartz build --serve"
+    "serve": "npx quartz build --serve",
+    "blub": "cd ./quartz/custom/plugins/transformers && tsx ./build.ts "
   },
   "config": {
     "title": "Test Title"

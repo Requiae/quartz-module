@@ -71,7 +71,7 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
-      Custom.plugins.transformers.Leaflet(),
+      Plugin.LeafletMap(),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
