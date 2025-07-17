@@ -26,11 +26,10 @@ jobs:
         with:
           node-version: 22
       - name: Install Dependencies
-        run: npm install
-      - name: Build Quartz static files
+        run: npm ci
+      - name: Build Quartz
         run: npx quartz build
-      - name: Upload static files as artifact
-        id: deployment
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
