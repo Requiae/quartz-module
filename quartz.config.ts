@@ -1,6 +1,5 @@
 import { QuartzConfig } from "./quartz/cfg";
 import * as Plugin from "./quartz/plugins";
-import * as Custom from "./quartz/custom";
 
 /**
  * Quartz 4 Configuration
@@ -9,13 +8,13 @@ import * as Custom from "./quartz/custom";
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: process.env.npm_package_config_title ?? "🪴 Quartz 4.5",
+    pageTitle: "Quartz Module",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
-    analytics: { provider: "plausible" },
+    analytics: null,
     locale: "en-GB",
-    baseUrl: process.env.npm_package_config_baseurl ?? "https://requiae.github.io/quartz-module/",
+    baseUrl: "https://requiae.github.io/quartz-module/",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
@@ -55,9 +54,6 @@ const config: QuartzConfig = {
   plugins: {
     transformers: [
       Plugin.FrontMatter(),
-      Plugin.CreatedModifiedDate({
-        priority: ["frontmatter", "git", "filesystem"],
-      }),
       Plugin.SyntaxHighlighting({
         theme: {
           light: "github-light",
