@@ -6,6 +6,11 @@ marker:
     y: 55
     icon: diner
     colour: f44
+  - mapName: Test
+    x: 100
+    y: 105
+    icon: diner
+    colour: f23
   - mapName: Test2
     x: 100
     y: 105
